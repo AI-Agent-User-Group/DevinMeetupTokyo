@@ -1,0 +1,14 @@
+name: issue-translator
+on:
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    if: github.actor != 'issues-translate-bot'   # 無限ループ防止
+    steps:
+      - uses: usthe/issues-translate-action@v2.7
+        with:
+          IS_MODIFY_TITLE: false
